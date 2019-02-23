@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+    </head>
+    <body>
+        <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+                <h1>{{ question.question_text }}</h1>
+
+                <ul>
+                {% for choice in question.choice_set.all %}
+                    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+                {% endfor %}
+                </ul>
+
+                <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+            </div>
+
+        </div>
+    </body>
+</html>
