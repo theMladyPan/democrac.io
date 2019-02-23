@@ -1,8 +1,21 @@
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import reverse, render, get_object_or_404
 from django.views import generic
+from django.utils import timezone
 
 from .models import Choice, Question
+
+
+def new_poll(request):
+    context = {}
+    return render(request, 'new.html', context)
+
+
+def create_poll(request):
+    q = Question(question_text=request.POST.get("question"), pub_date=timezone.now())
+
+    q.save()
+    return HttpResponseRedirect(reverse('polls:index'))
 
 
 def index(request):
